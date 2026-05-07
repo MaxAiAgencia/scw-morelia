@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { wrestlers } from "@/data/wrestlers";
 
 function WrestlerSilhouette({ color }: { color: string }) {
@@ -76,11 +77,21 @@ export default function RosterPreview() {
                   style={{ background: `linear-gradient(160deg, ${w.color}22 0%, #0a0a0a 100%)` }}
                 >
                   <div className="relative w-full h-full">
-                    <WrestlerSilhouette color={w.color} />
+                    {w.image ? (
+                      <Image
+                        src={w.image}
+                        alt={w.name}
+                        fill
+                        className="object-cover object-top"
+                        sizes="(max-width: 768px) 50vw, 25vw"
+                      />
+                    ) : (
+                      <WrestlerSilhouette color={w.color} />
+                    )}
                     {/* Number */}
                     <div className="absolute top-3 left-3">
                       <span className="font-bebas text-5xl leading-none"
-                        style={{ color: w.color, opacity: 0.2 }}>
+                        style={{ color: w.color, opacity: w.image ? 0.6 : 0.2 }}>
                         {w.number}
                       </span>
                     </div>

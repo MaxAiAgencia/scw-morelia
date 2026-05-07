@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { wrestlers, type Wrestler } from "@/data/wrestlers";
 
 export const metadata: Metadata = {
@@ -117,9 +118,19 @@ function WrestlerCard({ wrestler: w }: { wrestler: Wrestler }) {
           style={{ background: `linear-gradient(160deg, ${w.color}22 0%, #0a0a0a 100%)` }}
         >
           <div className="relative w-full h-full">
-            <WrestlerSilhouette color={w.color} />
+            {w.image ? (
+              <Image
+                src={w.image}
+                alt={w.name}
+                fill
+                className="object-cover object-top"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              />
+            ) : (
+              <WrestlerSilhouette color={w.color} />
+            )}
             <div className="absolute top-3 left-3">
-              <span className="font-bebas text-5xl leading-none" style={{ color: w.color, opacity: 0.15 }}>
+              <span className="font-bebas text-5xl leading-none" style={{ color: w.color, opacity: w.image ? 0.6 : 0.15 }}>
                 {w.number}
               </span>
             </div>

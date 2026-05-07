@@ -9,6 +9,7 @@ export interface Wrestler {
   number: string;
   weight?: string;
   hometown?: string;
+  image?: string;
 }
 
 export const wrestlers: Wrestler[] = [
@@ -48,6 +49,7 @@ export const wrestlers: Wrestler[] = [
     bio: "Desde las profundidades, Hades trae destrucción a todo el que se le pone enfrente.",
     color: "#1a1a3e",
     number: "04",
+    image: "/images/hades.png",
   },
   {
     id: 5,
