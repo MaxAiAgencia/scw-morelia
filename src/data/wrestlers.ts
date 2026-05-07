@@ -63,11 +63,12 @@ export const wrestlers: Wrestler[] = [
   {
     id: 6,
     name: "René Rocks",
-    alias: "La Roca de Morelia",
+    alias: "El Cabrón",
     style: "Rudo",
     bio: "Sólido como una roca. René Rocks destruye rivales sin piedad ni remordimientos.",
     color: "#3e2a0a",
     number: "06",
+    image: "/images/ReneRocks.jpg",
   },
   {
     id: 7,

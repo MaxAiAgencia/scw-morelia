@@ -53,13 +53,6 @@ export default function LuchadoresPage() {
         </div>
       </section>
 
-      {/* Notice */}
-      <div className="bg-[#111] border-y border-[#D4A017]/20 py-4">
-        <p className="text-center font-oswald text-[#D4A017] text-sm tracking-widest">
-          ⚠️ Roster placeholder — próximamente con fotos y perfiles reales de los luchadores SCW
-        </p>
-      </div>
-
       {/* Rudos */}
       <section className="py-20 bg-[#0a0a0a]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
