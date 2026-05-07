@@ -43,7 +43,7 @@ export const events: Event[] = [
       { type: "Mano a Mano", fighter1: "Tommy Harrier", fighter2: "Cerbero" },
       { type: "Lucha de 3 Esquinas", fighter1: "Eddy Lee", fighter2: "Toro Machine", fighter3: "Fight Panter Jr." },
     ],
-    ticketUrl: "#boletos",
+    ticketUrl: "https://www.masentrada.app/events/scw-strong-style-friday-nites-2?fbclid=IwY2xjawRp4w1leHRuA2FlbQIxMQBzcnRjBmFwcF9pZBAyMjIwMzkxNzg4MjAwODkyAAEe9wDp2mGuciSW2RGBTS9Zbv80WwzeVzNa1H06QoBvCysiyCqliWgRrWRK1uU_aem_0gGhSFdX0fuglonBeW78ZQ",
   },
   {
     id: 2,
