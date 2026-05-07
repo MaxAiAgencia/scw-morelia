@@ -7,6 +7,8 @@ export interface Wrestler {
   bio: string;
   color: string;
   number: string;
+  weight?: string;
+  hometown?: string;
 }
 
 export const wrestlers: Wrestler[] = [
