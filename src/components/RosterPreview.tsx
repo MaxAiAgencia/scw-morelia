@@ -126,48 +126,59 @@ export default function RosterPreview() {
                   </div>
                 </div>
 
-                {/* Back — fondo completamente opaco para tapar la imagen del frente */}
+                {/* Back — imagen atenuada + overlay oscuro para legibilidad */}
                 <div
-                  className="wrestler-card-back w-full h-full rounded-sm border overflow-hidden flex flex-col justify-between p-5"
-                  style={{
-                    background: `linear-gradient(160deg, #0d0d0d 0%, #111 50%, #0a0a0a 100%)`,
-                    borderColor: `${w.color}50`,
-                    boxShadow: `inset 0 0 40px ${w.color}18`,
-                  }}
+                  className="wrestler-card-back w-full h-full rounded-sm border overflow-hidden flex flex-col justify-between p-5 relative"
+                  style={{ borderColor: `${w.color}50` }}
                 >
+                  {/* Imagen de fondo atenuada */}
+                  {w.image && (
+                    <Image
+                      src={w.image}
+                      alt={w.name}
+                      fill
+                      className="object-cover object-top"
+                      sizes="(max-width: 768px) 50vw, 25vw"
+                    />
+                  )}
+                  {/* Overlay oscuro — atenúa la imagen para que el texto se lea */}
+                  <div className="absolute inset-0" style={{ background: w.image ? "linear-gradient(160deg, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.75) 100%)" : `linear-gradient(160deg, ${w.color}22 0%, #0a0a0a 100%)` }} />
                   {/* Color accent line top */}
                   <div className="absolute top-0 left-0 right-0 h-1 rounded-t-sm" style={{ background: `linear-gradient(90deg, ${w.color}, transparent)` }} />
 
-                  <div>
-                    <p className="font-bebas text-[#D4A017] tracking-[0.3em] text-xs mb-1">FICHA TÉCNICA</p>
-                    <h3 className="font-bebas text-white text-2xl leading-none mb-1">{w.name}</h3>
-                    <p className="font-oswald text-gray-400 text-xs tracking-wide">{w.alias}</p>
+                  {/* Contenido sobre el overlay */}
+                  <div className="relative z-10 flex flex-col justify-between h-full">
+                    <div>
+                      <p className="font-bebas text-[#D4A017] tracking-[0.3em] text-xs mb-1">FICHA TÉCNICA</p>
+                      <h3 className="font-bebas text-white text-2xl leading-none mb-1">{w.name}</h3>
+                      <p className="font-oswald text-gray-300 text-xs tracking-wide">{w.alias}</p>
+                    </div>
+
+                    <div className="space-y-2">
+                      {[
+                        { label: "Estilo", value: w.style },
+                        ...(w.weight ? [{ label: "Peso", value: w.weight }] : []),
+                        ...(w.hometown ? [{ label: "Origen", value: w.hometown }] : []),
+                        ...(w.title ? [{ label: "Título", value: w.title }] : []),
+                      ].map(({ label, value }) => (
+                        <div key={label} className="flex justify-between border-b border-white/10 pb-1.5">
+                          <span className="font-oswald text-gray-400 uppercase tracking-wider text-xs">{label}</span>
+                          <span className="font-oswald text-white text-xs">{value}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    <p className="font-oswald text-gray-200 text-sm leading-relaxed italic">
+                      &ldquo;{w.bio}&rdquo;
+                    </p>
+
+                    <Link
+                      href="/luchadores"
+                      className="block text-center btn-gold py-2 rounded-sm font-bebas tracking-widest text-sm"
+                    >
+                      Ver Perfil Completo
+                    </Link>
                   </div>
-
-                  <div className="space-y-2">
-                    {[
-                      { label: "Estilo", value: w.style },
-                      ...(w.weight ? [{ label: "Peso", value: w.weight }] : []),
-                      ...(w.hometown ? [{ label: "Origen", value: w.hometown }] : []),
-                      ...(w.title ? [{ label: "Título", value: w.title }] : []),
-                    ].map(({ label, value }) => (
-                      <div key={label} className="flex justify-between border-b border-white/8 pb-1.5">
-                        <span className="font-oswald text-gray-500 uppercase tracking-wider text-xs">{label}</span>
-                        <span className="font-oswald text-gray-200 text-xs">{value}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  <p className="font-oswald text-gray-300 text-sm leading-relaxed italic">
-                    &ldquo;{w.bio}&rdquo;
-                  </p>
-
-                  <Link
-                    href="/luchadores"
-                    className="block text-center btn-gold py-2 rounded-sm font-bebas tracking-widest text-sm"
-                  >
-                    Ver Perfil Completo
-                  </Link>
                 </div>
               </div>
             </div>

@@ -150,38 +150,52 @@ function WrestlerCard({ wrestler: w }: { wrestler: Wrestler }) {
           </div>
         </div>
 
-        {/* Back */}
+        {/* Back — imagen atenuada + overlay oscuro */}
         <div
-          className="wrestler-card-back w-full h-full rounded-sm border overflow-hidden p-6 flex flex-col justify-between"
-          style={{
-            background: `linear-gradient(160deg, ${w.color}30 0%, #0a0a0a 100%)`,
-            borderColor: `${w.color}40`,
-          }}
+          className="wrestler-card-back w-full h-full rounded-sm border overflow-hidden relative"
+          style={{ borderColor: `${w.color}50` }}
         >
-          <div>
-            <p className="font-bebas text-[#D4A017] tracking-[0.3em] text-xs mb-1">FICHA TÉCNICA</p>
-            <h3 className="font-bebas text-white text-2xl">{w.name}</h3>
-            <p className="font-oswald text-gray-400 text-xs tracking-wide">{w.alias}</p>
+          {w.image && (
+            <Image
+              src={w.image}
+              alt={w.name}
+              fill
+              className="object-cover object-top"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            />
+          )}
+          {/* Overlay oscuro */}
+          <div className="absolute inset-0" style={{ background: w.image ? "linear-gradient(160deg, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.75) 100%)" : `linear-gradient(160deg, ${w.color}22 0%, #0a0a0a 100%)` }} />
+          {/* Línea de color arriba */}
+          <div className="absolute top-0 left-0 right-0 h-1" style={{ background: `linear-gradient(90deg, ${w.color}, transparent)` }} />
+
+          {/* Contenido */}
+          <div className="relative z-10 flex flex-col justify-between h-full p-6">
+            <div>
+              <p className="font-bebas text-[#D4A017] tracking-[0.3em] text-xs mb-1">FICHA TÉCNICA</p>
+              <h3 className="font-bebas text-white text-2xl leading-none">{w.name}</h3>
+              <p className="font-oswald text-gray-300 text-xs tracking-wide">{w.alias}</p>
+            </div>
+            <div className="space-y-2">
+              {[
+                { label: "Estilo", value: w.style },
+                ...(w.weight ? [{ label: "Peso", value: w.weight }] : []),
+                ...(w.hometown ? [{ label: "Origen", value: w.hometown }] : []),
+                ...(w.title ? [{ label: "Título", value: w.title }] : []),
+              ].map(({ label, value }) => (
+                <div key={label} className="flex justify-between border-b border-white/10 pb-1.5">
+                  <span className="font-oswald text-gray-400 text-xs uppercase tracking-wider">{label}</span>
+                  <span className="font-oswald text-white text-xs">{value}</span>
+                </div>
+              ))}
+            </div>
+            <p className="font-oswald text-gray-200 text-sm leading-relaxed italic">
+              &ldquo;{w.bio}&rdquo;
+            </p>
+            <Link href="/eventos" className="block text-center btn-gold py-3 rounded-sm font-bebas tracking-widest text-sm">
+              Ver Próximo Evento
+            </Link>
           </div>
-          <div className="space-y-2">
-            {[
-              { label: "Peso", value: w.weight },
-              { label: "Origen", value: w.hometown },
-              { label: "Estilo", value: w.style },
-              ...(w.title ? [{ label: "Título", value: w.title }] : []),
-            ].map(({ label, value }) => (
-              <div key={label} className="flex justify-between border-b border-white/5 pb-2">
-                <span className="font-oswald text-gray-500 text-xs uppercase tracking-wider">{label}</span>
-                <span className="font-oswald text-white text-xs">{value}</span>
-              </div>
-            ))}
-          </div>
-          <p className="font-oswald text-gray-400 text-sm leading-relaxed italic">
-            &ldquo;{w.bio}&rdquo;
-          </p>
-          <Link href="/eventos" className="block text-center btn-gold py-3 rounded-sm font-bebas tracking-widest text-sm">
-            Ver Próximo Evento
-          </Link>
         </div>
       </div>
     </div>
