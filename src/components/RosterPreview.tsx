@@ -40,7 +40,10 @@ function WrestlerSilhouette({ color }: { color: string }) {
 }
 
 export default function RosterPreview() {
-  const preview = wrestlers.slice(0, 4);
+  // Primero los que tienen foto, luego rellena hasta 4
+  const withPhoto = wrestlers.filter((w) => w.image);
+  const withoutPhoto = wrestlers.filter((w) => !w.image);
+  const preview = [...withPhoto, ...withoutPhoto].slice(0, 4);
 
   return (
     <section className="relative py-24 bg-[#0f0f0f] overflow-hidden">
@@ -70,7 +73,7 @@ export default function RosterPreview() {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {preview.map((w) => (
             <div key={w.id} className="wrestler-card cursor-pointer">
-              <div className="wrestler-card-inner h-80 sm:h-96 rounded-sm overflow-hidden">
+              <div className="wrestler-card-inner h-80 sm:h-96 rounded-sm">
                 {/* Front */}
                 <div
                   className="wrestler-card-front w-full h-full rounded-sm overflow-hidden border border-white/5"
@@ -125,7 +128,7 @@ export default function RosterPreview() {
 
                 {/* Back */}
                 <div
-                  className="wrestler-card-back w-full h-full rounded-sm border flex flex-col justify-between p-5"
+                  className="wrestler-card-back w-full h-full rounded-sm border overflow-hidden flex flex-col justify-between p-5"
                   style={{
                     background: `linear-gradient(160deg, ${w.color}33 0%, #0a0a0a 100%)`,
                     borderColor: `${w.color}40`,
@@ -139,9 +142,9 @@ export default function RosterPreview() {
 
                   <div className="space-y-2 text-sm">
                     {[
-                      { label: "Peso", value: w.weight },
-                      { label: "Origen", value: w.hometown },
                       { label: "Estilo", value: w.style },
+                      ...(w.weight ? [{ label: "Peso", value: w.weight }] : []),
+                      ...(w.hometown ? [{ label: "Origen", value: w.hometown }] : []),
                       ...(w.title ? [{ label: "Título", value: w.title }] : []),
                     ].map(({ label, value }) => (
                       <div key={label} className="flex justify-between border-b border-white/5 pb-2">
@@ -168,7 +171,7 @@ export default function RosterPreview() {
         </div>
 
         <p className="text-center mt-8 font-oswald text-gray-500 text-sm tracking-widest">
-          Pasa el cursor sobre las tarjetas para ver la ficha de cada luchador
+          Pasa el cursor sobre cada luchador para ver su ficha
         </p>
       </div>
     </section>

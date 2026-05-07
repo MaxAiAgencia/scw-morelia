@@ -104,7 +104,7 @@ function WrestlerCard({ wrestler: w }: { wrestler: Wrestler }) {
     <div
       className="wrestler-card cursor-pointer"
     >
-      <div className="wrestler-card-inner h-96 rounded-sm overflow-hidden">
+      <div className="wrestler-card-inner h-96 rounded-sm">
         {/* Front */}
         <div
           className="wrestler-card-front w-full h-full border border-white/5 rounded-sm overflow-hidden"
@@ -152,7 +152,7 @@ function WrestlerCard({ wrestler: w }: { wrestler: Wrestler }) {
 
         {/* Back */}
         <div
-          className="wrestler-card-back w-full h-full rounded-sm border p-6 flex flex-col justify-between"
+          className="wrestler-card-back w-full h-full rounded-sm border overflow-hidden p-6 flex flex-col justify-between"
           style={{
             background: `linear-gradient(160deg, ${w.color}30 0%, #0a0a0a 100%)`,
             borderColor: `${w.color}40`,
